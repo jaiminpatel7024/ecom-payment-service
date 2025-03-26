@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
 
@@ -39,7 +40,7 @@ public class MainRestController {
             paymentObj.setPaymentId(String.valueOf(new Random().nextInt(100000)));
             paymentObj.setOrderId(orderId);
             paymentObj.setStatus("PAID");
-            paymentObj.setPaymentTime(LocalDate.now());
+            paymentObj.setPaymentTime(LocalDateTime.now());
 
             paymentRepo.save(paymentObj);
 

@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -18,7 +18,7 @@ public class Payment {
     private String paymentId;
     private String orderId;
     private String status; //PENDING,LINK_GENERATED,PAID,UNPAID
-    private LocalDate paymentTime;
+    private LocalDateTime paymentTime;
 
     @Override
     public String toString() {
