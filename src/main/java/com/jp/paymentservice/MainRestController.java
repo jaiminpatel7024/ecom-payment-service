@@ -30,12 +30,13 @@ public class MainRestController {
     }
 
     @PostMapping("/payment/create/{orderId}")
-    public ResponseEntity<?> createPlan(@RequestHeader("Authorization") String token, @PathVariable("orderId") String orderId)
+    public ResponseEntity<?> createPayment@RequestHeader("Authorization") String token, @PathVariable("orderId") String orderId)
     {
         log.info("Received request to create payment link for orderId : {}", orderId);
 
         if(customerService.validateToken(token)){
 
+            log.info("Token validated for payment creation for order : {}", orderId);
             Payment paymentObj = new Payment();
             paymentObj.setPaymentId(String.valueOf(new Random().nextInt(100000)));
             paymentObj.setOrderId(orderId);
@@ -43,10 +44,12 @@ public class MainRestController {
             paymentObj.setPaymentTime(LocalDateTime.now());
 
             paymentRepo.save(paymentObj);
+            log.info("Payment created and successful for order : {}", orderId);
 
             return ResponseEntity.ok("PaymentID:"+paymentObj.getPaymentId());
         } else {
-            return ResponseEntity.status(401).build();
+            log.info("Unauthrozied access for creating payment link for order : {}", orderId);
+            return ResponseEntity.status(401).body("Unauthorized");
         }
     }
 

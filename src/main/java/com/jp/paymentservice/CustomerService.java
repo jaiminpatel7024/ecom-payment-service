@@ -23,10 +23,6 @@ public class CustomerService
 
         log.info("Validating token within the CustomerService: {}", token);
         log.info("Sending request to customer service to validate token: {}", token);
-        /*String response = webClient.get().uri("/validate")
-                .header("Authorization", token)
-                .retrieve()
-                .bodyToMono(String.class).block(); // Current Thread will pause till the final response comes back*/
 
         try {
             String response = webClient.get()
@@ -43,10 +39,10 @@ public class CustomerService
 
         } catch (WebClientResponseException e) {
             if (e.getStatusCode().value() == 401) {
-                System.out.println("Unauthorized request. Handle accordingly.");
-                return false; // Or throw a custom exception
+                log.error("Unauthorized request.");
+                return false;
             }
-            throw e; // Re-throw other exceptions
+            throw e;
         }
 
     }
