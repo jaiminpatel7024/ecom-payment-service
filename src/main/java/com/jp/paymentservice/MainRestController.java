@@ -30,7 +30,7 @@ public class MainRestController {
     }
 
     @PostMapping("/payment/create/{orderId}")
-    public ResponseEntity<?> createPayment@RequestHeader("Authorization") String token, @PathVariable("orderId") String orderId)
+    public ResponseEntity<?> createPayment (@RequestHeader("Authorization") String token, @PathVariable("orderId") String orderId)
     {
         log.info("Received request to create payment link for orderId : {}", orderId);
 
